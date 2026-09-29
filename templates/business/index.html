@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{businessName}} | {{tagline}}</title>
+<meta name="description" content="{{description}}">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="logo">{{logoText}}</div>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-primary" href="tel:{{phone}}">Call {{phone}}</a>
+  </div>
+</header>
+
+<section class="hero" style="background-image: url('{{heroImage}}');">
+  <div class="container hero-content">
+    <h1>{{businessName}}</h1>
+    <p class="tagline">{{tagline}}</p>
+    <a class="btn btn-accent" href="#contact">Get a Free Quote</a>
+  </div>
+</section>
+
+<section id="services" class="section">
+  <div class="container">
+    <h2>Our Services</h2>
+    <div class="grid services-grid">
+      <!-- SERVICES -->
+    </div>
+  </div>
+</section>
+
+<section id="about" class="section section-alt">
+  <div class="container">
+    <h2>About {{businessName}}</h2>
+    <p>{{description}}</p>
+  </div>
+</section>
+
+<section id="testimonials" class="section">
+  <div class="container">
+    <h2>What Our Customers Say</h2>
+    <div class="grid testimonials-grid">
+      <!-- TESTIMONIALS -->
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section section-alt">
+  <div class="container contact-grid">
+    <div>
+      <h2>Contact Us</h2>
+      <p><strong>Phone:</strong> <a href="tel:{{phone}}">{{phone}}</a></p>
+      <p><strong>Email:</strong> <a href="mailto:{{email}}">{{email}}</a></p>
+      <p><strong>Address:</strong> {{address}}</p>
+      <p><strong>Hours:</strong> {{hours}}</p>
+    </div>
+    <form class="contact-form" onsubmit="return false;">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="How can we help?" rows="4" required></textarea>
+      <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; {{year}} {{businessName}}. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

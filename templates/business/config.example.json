@@ -1,0 +1,29 @@
+{
+  "slug": "acme-plumbing",
+  "businessName": "Acme Plumbing",
+  "tagline": "Fast, reliable plumbing you can trust",
+  "description": "Acme Plumbing has served the metro area for over 20 years with 24/7 emergency repairs, installations, and maintenance.",
+  "phone": "(555) 123-4567",
+  "email": "contact@acmeplumbing.example",
+  "address": "123 Main St, Springfield, ST 00000",
+  "hours": "Mon-Fri 8am-6pm, Sat 9am-2pm",
+  "primaryColor": "#1d4ed8",
+  "accentColor": "#f59e0b",
+  "logoText": "Acme Plumbing",
+  "heroImage": "assets/hero.jpg",
+  "services": [
+    { "title": "Emergency Repairs", "description": "24/7 response for leaks, burst pipes, and clogs." },
+    { "title": "Installations", "description": "Water heaters, fixtures, and full repiping." },
+    { "title": "Maintenance", "description": "Scheduled inspections to prevent costly breakdowns." }
+  ],
+  "testimonials": [
+    { "quote": "Fast, professional, and fairly priced.", "author": "Jamie R." },
+    { "quote": "Fixed our water heater the same day we called.", "author": "Morgan T." }
+  ],
+  "socialLinks": {
+    "facebook": "",
+    "instagram": "",
+    "google": ""
+  },
+  "year": "2026"
+}

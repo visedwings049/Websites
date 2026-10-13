@@ -1,8 +1,9 @@
 # Websites
 
-A template-based system for building simple business websites. No build tools
-or frameworks required — just static HTML/CSS/JS generated from a reusable
-template plus a per-business config file.
+A template-based system for building simple business websites, plus the
+finished sites themselves. No build tools or frameworks required — just
+static HTML/CSS/JS, either generated from a reusable template and a
+per-business config file, or built by hand.
 
 ## Structure
 
@@ -10,6 +11,9 @@ template plus a per-business config file.
 templates/<template-name>/   Master template (HTML/CSS/JS with {{placeholders}})
 scripts/generate-site.js     Generator: fills a template with a config to produce a site
 sites/<slug>/                Generated, ready-to-deploy sites (output, git-ignored except a keep file)
+<site-name>/                 Each finished client site lives in its own top-level folder
+                              (e.g. all-hearts-aflame/, marshfield-lennons/), checked in —
+                              whether generated from a template or built by hand
 ```
 
 ## Creating a new business site

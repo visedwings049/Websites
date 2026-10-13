@@ -5,6 +5,13 @@ finished sites themselves. No build tools or frameworks required — just
 static HTML/CSS/JS, either generated from a reusable template and a
 per-business config file, or built by hand.
 
+## Active Sites
+
+| Site | Folder | Domain | Status |
+| --- | --- | --- | --- |
+| Marshfield Lennons (ML) | [`marshfield-lennons/`](marshfield-lennons/) | [marshfieldlennons.com](https://marshfieldlennons.com) | Live |
+| All Hearts Aflame (AFA) | [`all-hearts-aflame/`](all-hearts-aflame/) | — | Built, not yet deployed |
+
 ## Structure
 
 ```

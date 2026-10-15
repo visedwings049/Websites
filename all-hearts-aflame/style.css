@@ -71,7 +71,8 @@ p { margin: 0 0 1.1em; }
 .site-header.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); }
 .site-header::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--gold-grad); opacity: .85; }
 .nav-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 76px; padding: 8px 0; }
-.brand img { height: 116px; width: auto; }
+.brand { flex: none; }
+.brand img { height: 116px; width: auto; max-width: none; }
 .brand span { font-family: var(--serif); font-size: 3.2rem; font-weight: 700; }
 .nav { display: flex; align-items: center; gap: 26px; }
 .nav > a {
@@ -299,6 +300,32 @@ audio { width: 100%; accent-color: var(--gold); margin-top: auto; }
 .pdf-list { display: grid; gap: 14px; max-width: 460px; margin: 0 auto; }
 .pdf-list .btn { margin-top: 0; }
 
+/* ---------- mailing-list popup ---------- */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+body.signup-open { overflow: hidden; }
+.signup { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 20px; }
+.signup[hidden] { display: none; }
+.signup-backdrop { position: absolute; inset: 0; background: rgba(10, 10, 10, .58); backdrop-filter: blur(4px); animation: signupFade .4s ease both; }
+.signup-card { position: relative; width: min(540px, 100%); max-height: calc(100vh - 40px); overflow: auto; padding: 46px 42px 38px; text-align: center; border: 3px solid transparent;
+  background-image: linear-gradient(#fff, #fff), var(--gold-grad); background-origin: border-box; background-clip: padding-box, border-box;
+  box-shadow: 0 40px 90px rgba(0, 0, 0, .45), 0 0 70px rgba(232, 205, 120, .35); animation: signupRise .5s cubic-bezier(.2, .7, .2, 1) both; }
+.signup-x { position: absolute; right: 10px; top: 6px; width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 0; cursor: pointer;
+  font-size: 2rem; line-height: 1; color: #0a0a0a; transition: color .2s, transform .2s; }
+.signup-x:hover { color: var(--gold-deep); transform: scale(1.1); }
+.signup-eyebrow { font-family: var(--caps); font-size: .8rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-deep); margin: 0 0 12px; }
+.signup-card h2 { font-size: clamp(1.8rem, 5vw, 2.3rem); line-height: 1.12; }
+.signup-sub { font-family: var(--serif); font-size: 1.7rem; font-weight: 700; margin: 14px 0 22px; }
+.signup-card form { display: grid; gap: 14px; }
+.signup-card input[type="email"] { font: inherit; font-family: var(--sans); font-size: 1.05rem; color: #0a0a0a; padding: 15px 16px; border: 1px solid #0a0a0a; border-radius: 0; background: #fff; width: 100%; text-align: center; }
+.signup-card input[type="email"]:focus { outline: 3px solid rgba(201, 162, 39, .55); border-color: var(--gold); }
+.signup-card .btn { width: 100%; }
+.signup-card .btn[disabled] { opacity: .6; cursor: wait; }
+.signup-error { margin: 0; color: #8a1c0c; font-weight: 600; font-size: .95rem; }
+.signup-note { margin: 18px 0 0; font-size: .92rem; line-height: 1.5; color: var(--muted); }
+@keyframes signupFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes signupRise { from { opacity: 0; transform: translateY(24px) scale(.97); } to { opacity: 1; transform: none; } }
+
 /* reveal */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s ease, transform .9s cubic-bezier(.2, .7, .2, 1); }
 .reveal.in { opacity: 1; transform: none; }
@@ -316,7 +343,7 @@ audio { width: 100%; accent-color: var(--gold); margin-top: auto; }
   .speak-photo .arch { margin: 0 auto; }
   .about-photos { max-width: 460px; margin: 0 auto; }
 }
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
   .nav-row { position: relative; padding: 6px 0; }
   .brand img { height: 96px; }
   .nav-toggle { display: block; }
@@ -328,6 +355,8 @@ audio { width: 100%; accent-color: var(--gold); margin-top: auto; }
   .nav-social { margin: 0; padding: 16px 6vw 20px; border-left: 0; border-top: 1px solid #f1e7c6; }
 }
 @media (max-width: 640px) {
+  .signup-card { padding: 42px 22px 30px; }
+  .signup-sub { font-size: 1.45rem; }
   .ways { grid-template-columns: 1fr; gap: 40px; }
   .page-box { padding: 40px 22px 44px; }
   .page-section { padding: 56px 0 90px; }

@@ -100,7 +100,102 @@
   </div>
 </footer>
 
+<div class="signup" id="signup" hidden role="dialog" aria-modal="true" aria-labelledby="signupTitle"
+     data-endpoint="https://list.robly.com/subscribe/popup" data-fields='{"a": "320f8fd6aee25bbad7927e4db4efb2dd", "c": "", "e": "false", "f": "9763b189dda6c952dc57ca377bf8c11d", "sub_lists[]": "593514"}' data-email-field="popup_form_field_tags[13735]"
+     data-delay="5" data-hide-close="1" data-hide-signup="365"
+     data-error="We couldn’t reach the mailing list just now. Please try again in a moment, or email jolie@allheartsaflame.com.">
+  <div class="signup-backdrop" data-close></div>
+  <div class="signup-card">
+    <button class="signup-x" type="button" data-close aria-label="Close">&times;</button>
+    <svg class="page-flame"><use href="#flame-gold"/></svg>
+    <div data-state="form">
+      <p class="signup-eyebrow">Prayer For The Nation</p>
+      <h2 id="signupTitle">Need Help Knowing How to Pray for Your Nation?</h2>
+      <p class="signup-sub gold-text">Sign up for a POWERFUL PRAYER!</p>
+      <form id="signupForm" novalidate>
+        <label class="sr-only" for="signupEmail">Email address</label>
+        <input id="signupEmail" type="email" placeholder="Email address" autocomplete="email" required>
+        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="signup-error" role="alert" hidden></p>
+        <button class="btn btn-gold" type="submit">Sign Up</button>
+      </form>
+      <p class="signup-note">After you click “Sign Up,” check your inbox for a confirmation email and click the link to confirm your subscription!</p>
+    </div>
+    <div data-state="thanks" hidden>
+      <h2>Thank You!</h2>
+      <div class="gold-rule center"></div>
+      <p class="lead">Please check your inbox for a confirmation email and click the link to confirm your subscription.</p>
+      <button class="btn btn-ghost" type="button" data-close>Close</button>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  var box = document.getElementById('signup');
+  if (!box) return;
+  var KEY = 'afa_signup_hidden_until';
+  function hiddenNow() { try { return Number(localStorage.getItem(KEY) || 0) > Date.now(); } catch (e) { return false; } }
+  function hideFor(days) { try { localStorage.setItem(KEY, String(Date.now() + days * 864e5)); } catch (e) {} }
 
+  var lastFocus = null;
+  function open() {
+    if (!box.hidden) return;
+    lastFocus = document.activeElement;
+    box.hidden = false;
+    document.body.classList.add('signup-open');
+    var email = document.getElementById('signupEmail');
+    if (email) setTimeout(function () { email.focus(); }, 60);
+  }
+  function close(days) {
+    box.hidden = true;
+    document.body.classList.remove('signup-open');
+    hideFor(days || Number(box.dataset.hideClose) || 1);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  box.addEventListener('click', function (e) { if (e.target.closest('[data-close]')) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !box.hidden) close(); });
+  // keep keyboard focus inside the dialog while it is open
+  box.addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab') return;
+    var f = box.querySelectorAll('button:not([hidden]), input:not(.hp):not([hidden])');
+    f = Array.prototype.filter.call(f, function (n) { return n.offsetParent !== null; });
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  var form = document.getElementById('signupForm');
+  var err = box.querySelector('.signup-error');
+  function showError(msg) { err.textContent = msg; err.hidden = false; }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    err.hidden = true;
+    var email = document.getElementById('signupEmail').value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { showError('That does not appear to be a valid email address.'); return; }
+    var done = function () {
+      hideFor(Number(box.dataset.hideSignup) || 365);
+      box.querySelector('[data-state="form"]').hidden = true;
+      box.querySelector('[data-state="thanks"]').hidden = false;
+    };
+    // a bot filled the hidden field: look successful, send nothing
+    if (form.elements.website.value) { done(); return; }
+    var body = new URLSearchParams(), fields = {};
+    try { fields = JSON.parse(box.dataset.fields); } catch (x) {}
+    Object.keys(fields).forEach(function (k) { body.append(k, fields[k]); });
+    body.append(box.dataset.emailField, email);
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    // Robly answers without CORS headers, so the reply is unreadable (no-cors); a sent request counts as success
+    fetch(box.dataset.endpoint, { method: 'POST', mode: 'no-cors', body: body })
+      .then(done)
+      .catch(function () { showError(box.dataset.error); })
+      .then(function () { btn.disabled = false; });
+  });
+
+  if (!hiddenNow()) setTimeout(open, (Number(box.dataset.delay) || 0) * 1000);
+})();
+</script>
 <script>
 (function () {
   var doc = document;
